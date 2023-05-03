@@ -9,10 +9,23 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
-    pass
+    x,y = read_data()
+    lambd = 1e-5
+    weight = np.dot(np.linala.inv(np.dot(x.T,x)+np.dot(lambd,np.eye(6)),np.dot(x.T,y))
+    return weight @ data
     
 def lasso(data):
-    pass
+    label = 1e-5
+    x,y = read_data()
+    w = np.zeros([6,6])
+    rate = 1e-5
+    for i in range(9999999):
+        y_predict = np.dot(w, x)
+        loss = (np.sum(y_predict - y) ** 2) / 6
+        if loss < label:
+            break
+        w= w -np.dot((y_predict - y),x.T) * rate
+    return weight @ data
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
