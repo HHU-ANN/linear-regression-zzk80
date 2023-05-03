@@ -10,7 +10,7 @@ except ImportError as e:
 
 def ridge(data):
     x,y = read_data()
-    lambd = -0.01
+    lambd = -0.1
     weight = np.dot(np.linalg.inv((np.dot(x.T,x)+np.dot(lambd,np.eye(6)))),np.dot(x.T,y))
     return weight @ data
     
@@ -25,7 +25,7 @@ def lasso(data):
         if loss < label:
             break
         w= w -rate*np.dot((y_predict - y),x )
-    return weight @ data
+    return w @ data
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
